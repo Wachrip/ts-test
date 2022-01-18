@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -22,6 +22,10 @@ const TechContainer = () => {
   const { category } = useParams();
   const [arrayToShow, setArrayToShow] = useState(technics);
 
+  useEffect(() => {
+    setArrayToShow(technics);
+  }, [technics]);
+
   let arrayToRender = technics;
   const [currentPage, setCurrentPage] = useState(1);
   const [techPerPage] = useState(2);
@@ -34,23 +38,18 @@ const TechContainer = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // console.log(technics);
-
-  // if (technics !== arrayToShow && technics.length === arrayToShow.length) {
-  //   setArrayToShow(technics);
-  // }
-
   const onSortSelectHandler = (
     e: React.ChangeEvent<HTMLSelectElement>
   ): void => {
+    console.log(`arrayToRender sort ${arrayToRender.map((it) => it.price)}`);
     if (e.target.value === "Date") {
       dispatch(sortByDate());
     }
-    if (e.target.value === "highToLow") dispatch(sortByPriceHighToLow());
+    if (e.target.value === "highToLow") {
+      dispatch(sortByPriceHighToLow());
+    }
 
     if (e.target.value === "lowToHigh") dispatch(sortByPriceLowToHigh());
-
-    setArrayToShow(technics);
   };
 
   const onFilterSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -65,7 +64,6 @@ const TechContainer = () => {
       arrayToRender = technics.filter((it) => it.company === e.target.value);
       setArrayToShow(arrayToRender);
     }
-    console.log(arrayToRender);
   };
 
   const onFromValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

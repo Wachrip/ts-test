@@ -105,18 +105,6 @@ let technicsReducer = (state = initialState, action: AnyAction) => {
       };
     }
     case SORT_BY_PRICE_HIGH_TO_LOW: {
-      // return {
-      //   ...state,
-      //   technics: Array.from(
-      //     state.technics.sort((a, b) => {
-      //       return Number(b.price) - Number(a.price);
-      //     })
-      //   ),
-      // };
-      let newArr = [...state.technics].sort((a, b) => {
-        return Number(b.price) - Number(a.price);
-      });
-      console.log(`newArr ${newArr.map((it) => it.price)}`);
       return {
         ...state,
         technics: [...state.technics].sort((a, b) => {
@@ -125,21 +113,12 @@ let technicsReducer = (state = initialState, action: AnyAction) => {
       };
     }
     case SORT_BY_PRICE_LOW_TO_HIGH: {
-      let newArr = [...state.technics]
-        .sort((a, b) => {
-          return Number(b.price) - Number(a.price);
-        })
-        .reverse();
-
-      console.log(`newArr ${newArr.map((it) => it.price)}`);
-
       return {
         ...state,
-        technics: [...state.technics]
-          .sort((a, b) => {
-            return Number(b.price) - Number(a.price);
-          })
-          .reverse(),
+        technics: [...state.technics].sort((a, b) => {
+          return Number(a.price) - Number(b.price);
+        }),
+        // .reverse(),
       };
     }
 

@@ -5,7 +5,7 @@ import { TechState, Technics } from "../models/technics";
 const TechType: React.FC<TechState> = ({ technics }) => {
   const navigate = useNavigate();
 
-  console.log("+");
+  console.log(`+`);
 
   return (
     <div className="Techs">
