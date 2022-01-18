@@ -58,8 +58,13 @@ const ChosenTechEditingContainer = () => {
       throw Error("Введите наименование товара");
     }
 
-    if (price < 0) {
-      throw Error("Цена не может быть меньше 0.");
+    if (isNaN(price) || price === "") {
+      alert("Введите цену корректно");
+      throw Error("Введите цену корректно");
+    }
+
+    if (price <= 0) {
+      throw Error("Цена не может быть меньше или равна 0.");
     }
 
     if (description.length > 100) {
@@ -85,10 +90,12 @@ const ChosenTechEditingContainer = () => {
       category: category,
       company: company,
       model: model,
-      price: price,
+      price: Number(price),
       date: date,
       description: description,
     };
+
+    console.log(editingData);
 
     dispatch(editTech(editingData));
     navigate(`/techs/${techId}`);

@@ -14,7 +14,7 @@ const AddFormContainer = () => {
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
   const [model, setModel] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
 
@@ -31,7 +31,7 @@ const AddFormContainer = () => {
   };
 
   const onPriceChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(e.target.value);
+    setPrice(Number(e.target.value));
   };
 
   const onDescriptionChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -65,8 +65,13 @@ const AddFormContainer = () => {
       return true;
     });
 
-    if (Number(price) < 0) {
-      alert("Цена не может быть меньше 0.");
+    if (isNaN(price)) {
+      alert("Введите цену корректно");
+      throw Error("Введите цену корректно");
+    }
+
+    if (price <= 0) {
+      alert("Цена не может быть меньше или равна 0.");
       throw Error("Цена не может быть меньше 0.");
     }
 
@@ -103,6 +108,7 @@ const AddFormContainer = () => {
       date: date,
       description: description,
     };
+
     dispatch(addTech(addingObj));
     navigate(`/techs/${addingObj.id}`);
   };

@@ -5,7 +5,7 @@ import { TechState, Technics } from "../models/technics";
 const TechType: React.FC<TechState> = ({ technics }) => {
   const navigate = useNavigate();
 
-  console.log(`${technics.map((it) => it.price)}`);
+  // console.log(`${technics.map((it) => it.price)}`);
 
   return (
     <div className="Techs">
