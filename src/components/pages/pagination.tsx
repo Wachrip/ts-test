@@ -15,6 +15,7 @@ export const Pagination: React.FC<Pages> = ({
   for (let i = 1; i <= Math.ceil(totalTechs / techsPerPage); i++) {
     pageNumbers.push(i);
   }
+  console.log(techsPerPage);
   return (
     <div>
       <div className="w-full bg-white dark:bg-gray-800">

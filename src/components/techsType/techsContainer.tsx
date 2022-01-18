@@ -41,7 +41,7 @@ const TechContainer = () => {
   const onSortSelectHandler = (
     e: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    console.log(`arrayToRender sort ${arrayToRender.map((it) => it.price)}`);
+    // console.log(`arrayToRender sort ${arrayToRender.map((it) => it.price)}`);
     if (e.target.value === "Date") {
       dispatch(sortByDate());
     }
@@ -84,19 +84,22 @@ const TechContainer = () => {
     setArrayToShow(arrayToRender);
   };
 
+  let currentTechs = arrayToShow.slice(indexOfFirstTech, indexOfLastTech);
+
   if (category === "tvs") {
-    arrayToRender = technics.filter((it) => it.category === "TV");
+    arrayToRender = arrayToShow.filter((it) => it.category === "TV");
+    currentTechs = arrayToRender;
   }
 
   if (category === "refs") {
-    arrayToRender = technics.filter((it) => it.category === "Refrigerator");
+    arrayToRender = arrayToShow.filter((it) => it.category === "Refrigerator");
+    currentTechs = arrayToRender;
   }
 
   if (category === "cutters") {
-    arrayToRender = technics.filter((it) => it.category === "Cutter");
+    arrayToRender = arrayToShow.filter((it) => it.category === "Cutter");
+    currentTechs = arrayToRender;
   }
-
-  const currentTechs = arrayToShow.slice(indexOfFirstTech, indexOfLastTech);
 
   return (
     <div className="block">
